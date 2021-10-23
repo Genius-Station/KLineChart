@@ -23,6 +23,7 @@ import TagStore from './store/TagStore'
 import CrosshairStore from './store/CrosshairStore'
 import OverlayStore from './store/OverlayStore'
 import ActionStore from './store/ActionStore'
+import { logWarn } from '../utils/logger'
 
 export default class ChartData {
   constructor (styleOptions, handler) {
@@ -36,6 +37,8 @@ export default class ChartData {
     this._pricePrecision = 2
     // 数量精度
     this._volumePrecision = 0
+
+    this._intervalMs = null
 
     // 数据源
     this._dataList = []
@@ -125,6 +128,10 @@ export default class ChartData {
     this._technicalIndicatorStore.setSeriesPrecision(pricePrecision, volumePrecision)
   }
 
+  setIntervalMs (intervalMs) {
+    this._intervalMs = intervalMs
+  }
+
   /**
    * 获取数据源
    * @returns {[]|*[]}
@@ -139,6 +146,40 @@ export default class ChartData {
    */
   visibleDataList () {
     return this._visibleDataList
+  }
+
+  addTick (tickData) {
+    let last = this._dataList[this._dataList.length - 1]
+    const tickPrice = tickData.price
+    const volume = tickData.volume || 0
+
+    const tf = this._intervalMs
+    if (!tf) {
+      return logWarn(null, null, 'You must define the timeframe to add ticks !')
+    }
+
+    const now = tickData.t
+    if (!last) last = [now - (now % tf)]
+    const tNext = last.timestamp + tf
+    const t = now >= tNext ? now - (now % tf) : last.timestamp
+
+    if ((t >= tNext || !this._dataList.length) && tickPrice !== undefined) {
+      this.addData([
+        {
+          timestamp: t,
+          open: tickPrice,
+          high: tickPrice,
+          low: tickPrice,
+          close: tickPrice,
+          volume: volume
+        }
+      ])
+    } else if (tickPrice !== undefined) {
+      last.high = Math.max(tickPrice, last.high)
+      last.low = Math.min(tickPrice, last.low)
+      last.close = tickPrice
+      last.volume += volume
+    }
   }
 
   /**
