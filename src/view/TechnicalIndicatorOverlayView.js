@@ -34,6 +34,7 @@ export default class TechnicalIndicatorOverlayView extends View {
     this._drawTag()
     this._drawShape()
     this._drawAnnotation()
+    this._drawCustomOverlays()
     const crosshair = this._chartData.crosshairStore().get()
     if (crosshair.kLineData) {
       const styleOptions = this._chartData.styleOptions()
@@ -48,6 +49,13 @@ export default class TechnicalIndicatorOverlayView extends View {
       }
       this._drawTooltip(crosshair, this._chartData.technicalIndicatorStore().instances(this._paneId))
     }
+  }
+
+  _drawCustomOverlays() {
+    const overlays = this._chartData.overlayStore().get(this._paneId)
+    if (!overlays) return
+
+    overlays.forEach(overlay => overlay.draw(this._ctx))
   }
 
   /**

@@ -28,7 +28,8 @@ import { throttle } from '../utils/performance'
 import { createElement } from '../utils/element'
 import Annotation from '../component/overlay/Annotation'
 import Tag from '../component/overlay/Tag'
-import { perfectOverlayFunc } from '../component/overlay/Overlay'
+import Overlay, { perfectOverlayFunc } from '../component/overlay/Overlay'
+import CustomOverlay from '../component/overlay/CustomOverlay'
 
 import {
   CANDLE_PANE_ID,
@@ -526,6 +527,18 @@ export default class ChartPane {
       if (shouldUpdate) {
         this._invalidatePane(InvalidateLevel.OVERLAY)
       }
+    }
+  }
+
+  createOverlay(overlay, paneId) {
+    if (isValid(overlay.id)) {
+      this._chartData.overlayStore().add(new CustomOverlay({
+        id: overlay.id,
+        chartData: this._chartData,
+        xAxis: this._xAxisPane.xAxis(),
+        yAxis: this._panes.get(paneId).yAxis(),
+        drawFn: overlay.draw
+      }), paneId)
     }
   }
 

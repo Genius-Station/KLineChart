@@ -21,6 +21,7 @@ import ShapeStore from './store/ShapeStore'
 import AnnotationStore from './store/AnnotationStore'
 import TagStore from './store/TagStore'
 import CrosshairStore from './store/CrosshairStore'
+import OverlayStore from './store/OverlayStore'
 import ActionStore from './store/ActionStore'
 
 export default class ChartData {
@@ -58,6 +59,7 @@ export default class ChartData {
     this._crosshairStore = new CrosshairStore(this)
     // 事件存储
     this._actionStore = new ActionStore()
+    this._overlayStore = new OverlayStore(this)
   }
 
   /**
@@ -237,6 +239,10 @@ export default class ChartData {
    */
   actionStore () {
     return this._actionStore
+  }
+
+  overlayStore() {
+    return this._overlayStore
   }
 
   /**
