@@ -51,11 +51,11 @@ export default class TechnicalIndicatorOverlayView extends View {
     }
   }
 
-  _drawCustomOverlays() {
+  _drawCustomOverlays () {
     const overlays = this._chartData.overlayStore().get(this._paneId)
     if (!overlays) return
 
-    overlays.forEach(overlay => overlay.draw(this._ctx))
+    overlays.forEach(overlay => overlay.draw(this._ctx, this._xAxis, this._yAxis))
   }
 
   /**

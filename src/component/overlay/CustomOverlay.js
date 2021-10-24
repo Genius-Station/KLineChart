@@ -1,16 +1,16 @@
-import Overlay from "./Overlay";
+import Overlay from './Overlay'
 
 export default class CustomOverlay extends Overlay {
-  constructor({
+  constructor ({
     id, chartData, xAxis, yAxis, drawFn
   }) {
-    super({ id, chartData, xAxis, yAxis });
-    this.type = "customOverlay";
+    super({ id, chartData, xAxis, yAxis })
+    this.type = 'customOverlay'
 
-    this.drawFn = drawFn;
+    this.drawFn = drawFn
   }
 
-  draw(ctx) {
-    this.drawFn && this.drawFn(ctx)
+  draw (...params) {
+    this.drawFn && this.drawFn(...params)
   }
 }

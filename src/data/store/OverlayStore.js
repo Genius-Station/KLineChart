@@ -12,23 +12,22 @@
  * limitations under the License.
  */
 
+export default class OverlayStore {
+  constructor (chartData) {
+    this._chartData = chartData
+    this._overlays = new Map()
+  }
 
- export default class OverlayStore {
-   constructor (chartData) {
-     this._chartData = chartData
-     this._overlays = new Map()
-   }
-
-   add(overlay, paneId) {
+  add (overlay, paneId) {
     if (!this._overlays.has(paneId)) {
       this._overlays.set(paneId, new Map())
     }
     const idOverlay = this._overlays.get(paneId)
     idOverlay.set(overlay.id(), overlay)
     this._overlays.set(overlay.name, overlay)
-   }
+  }
 
-   get(paneId) {
+  get (paneId) {
     return this._overlays.get(paneId)
-   }
+  }
 }

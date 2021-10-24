@@ -282,7 +282,7 @@ export default class ChartData {
     return this._actionStore
   }
 
-  overlayStore() {
+  overlayStore () {
     return this._overlayStore
   }
 

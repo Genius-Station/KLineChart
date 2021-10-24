@@ -28,7 +28,7 @@ import { throttle } from '../utils/performance'
 import { createElement } from '../utils/element'
 import Annotation from '../component/overlay/Annotation'
 import Tag from '../component/overlay/Tag'
-import Overlay, { perfectOverlayFunc } from '../component/overlay/Overlay'
+import { perfectOverlayFunc } from '../component/overlay/Overlay'
 import CustomOverlay from '../component/overlay/CustomOverlay'
 
 import {
@@ -530,7 +530,7 @@ export default class ChartPane {
     }
   }
 
-  createOverlay(overlay, paneId) {
+  createOverlay (overlay, paneId) {
     if (isValid(overlay.id)) {
       this._chartData.overlayStore().add(new CustomOverlay({
         id: overlay.id,

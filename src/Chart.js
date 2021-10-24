@@ -477,7 +477,7 @@ export default class Chart {
     this._chartPane.chartData().tagStore().remove(paneId, tagId)
   }
 
-  createOverlay(overlay, paneId = CANDLE_PANE_ID) {
+  createOverlay (overlay, paneId = CANDLE_PANE_ID) {
     this._chartPane.createOverlay(overlay, paneId)
   }
 
