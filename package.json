@@ -37,6 +37,7 @@
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
+    "prepare": "npm run build",
     "lint": "./node_modules/.bin/eslint src",
     "build-extension": "./node_modules/.bin/babel src/extension --out-dir lib",
     "build-core": "./node_modules/.bin/rollup -c ./config/rollup.config.js",
