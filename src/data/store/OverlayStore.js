@@ -23,11 +23,34 @@ export default class OverlayStore {
       this._overlays.set(paneId, new Map())
     }
     const idOverlay = this._overlays.get(paneId)
-    idOverlay.set(overlay.id(), overlay)
-    this._overlays.set(overlay.name, overlay)
+    idOverlay.set(overlay.id, overlay)
+  }
+
+  removeAll () {
+    this._overlays.clear()
   }
 
   get (paneId) {
-    return this._overlays.get(paneId)
+    return this._overlays.get(paneId) || new Map()
+  }
+
+  getByPaneIdAndId (paneId, id) {
+    const paneOverlays = this._overlays.get(paneId)
+    if (paneOverlays) {
+      return paneOverlays.get(id)
+    }
+    return null
+  }
+
+  getAllOverlays() {
+    const overlays = []
+    this._overlays.forEach((overlay, key, map) => {
+      overlays.push(...overlay.values())
+    })
+    return overlays
+  }
+
+  isEmpty () {
+    return this._overlays.size === 0
   }
 }

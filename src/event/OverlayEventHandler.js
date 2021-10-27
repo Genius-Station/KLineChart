@@ -65,6 +65,9 @@ export default class OverlayEventHandler extends EventHandler {
    */
   mouseUpEvent () {
     this._chartData.shapeStore().updatePressedInstance()
+    this._chartData.overlayStore().get('candle_pane').forEach(overlay => {
+      overlay.onMouseUp()
+    })
   }
 
   mouseMoveEvent (event) {
@@ -99,6 +102,9 @@ export default class OverlayEventHandler extends EventHandler {
       const prevAnnotationHoverOperate = this._chartData.annotationStore().mouseOperate()
       shapeHoverOperate = this._performOverlayMouseHover(shapes, prevShapeHoverOperate, coordinate, event)
       annotationHoverOperate = this._performOverlayMouseHover(annotations, prevAnnotationHoverOperate, coordinate, event)
+      this._chartData.overlayStore().get(event.paneId).forEach(overlay => {
+        overlay.onMouseMove(coordinate)
+      })
     }
     this._chartData.shapeStore().setMouseOperate({
       hover: shapeHoverOperate || {
@@ -163,6 +169,10 @@ export default class OverlayEventHandler extends EventHandler {
           }
         }
       }
+
+      this._chartData.overlayStore().get(event.paneId).forEach(overlay => {
+        overlay.onMouseDown(coordinate)
+      })
     }
     const shapeOperateValid = this._chartData.shapeStore().setMouseOperate({
       hover: shapeHoverOperate,

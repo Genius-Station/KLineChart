@@ -148,7 +148,7 @@ export default class ChartEvent {
    * @private
    */
   _shouldPerformOverlayEvent () {
-    return !this._chartData.shapeStore().isEmpty() || !this._chartData.annotationStore().isEmpty()
+    return !this._chartData.shapeStore().isEmpty() || !this._chartData.annotationStore().isEmpty() || !this._chartData.overlayStore().isEmpty()
   }
 
   /**

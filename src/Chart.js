@@ -481,6 +481,14 @@ export default class Chart {
     this._chartPane.createOverlay(overlay, paneId)
   }
 
+  setOverlaySettings(overlayId, settings, paneId = CANDLE_PANE_ID) {
+    this._chartPane.setOverlaySettings(overlayId, settings, paneId)
+  }
+
+  removeAllOverlay (overlay) {
+    this._chartPane.removeAllOverlay(overlay)
+  }
+
   /**
    * 设置窗口属性
    * @param options 窗口配置

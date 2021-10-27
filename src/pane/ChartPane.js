@@ -29,7 +29,6 @@ import { createElement } from '../utils/element'
 import Annotation from '../component/overlay/Annotation'
 import Tag from '../component/overlay/Tag'
 import { perfectOverlayFunc } from '../component/overlay/Overlay'
-import CustomOverlay from '../component/overlay/CustomOverlay'
 
 import {
   CANDLE_PANE_ID,
@@ -531,15 +530,24 @@ export default class ChartPane {
   }
 
   createOverlay (overlay, paneId) {
-    if (isValid(overlay.id)) {
-      this._chartData.overlayStore().add(new CustomOverlay({
-        id: overlay.id,
-        chartData: this._chartData,
-        xAxis: this._xAxisPane.xAxis(),
-        yAxis: this._panes.get(paneId).yAxis(),
-        drawFn: overlay.draw
-      }), paneId)
-    }
+    overlay.setCoreData({
+      chartData: this._chartData,
+      xAxis: this._xAxisPane.xAxis(),
+      yAxis: this._panes.get(paneId).yAxis(),
+    })
+
+    this._chartData.overlayStore().add(overlay, paneId)
+  }
+
+  setOverlaySettings(overlayId, settings, paneId) {
+    const overlay = this._chartData.overlayStore().getByPaneIdAndId(paneId, overlayId)
+    if (!overlay) return
+
+    overlay.settings = settings
+  }
+
+  removeAllOverlay () {
+    this._chartData.overlayStore().removeAll()
   }
 
   /**
