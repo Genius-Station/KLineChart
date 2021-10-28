@@ -147,9 +147,10 @@ export default class EventBase {
   }
 
   _mouseMoveHandler (moveEvent) {
-    if (this._mousePressed && !isTouchEvent(moveEvent)) {
-      return
-    }
+    // Had to disable this to process mouse move when mouse pressed for dragging vignets.
+    // if (this._mousePressed && !isTouchEvent(moveEvent)) {
+    //   return
+    // }
 
     const compatEvent = this._makeCompatEvent(moveEvent)
     this._processEvent(compatEvent, this._handler.mouseMoveEvent)

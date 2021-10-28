@@ -544,6 +544,7 @@ export default class ChartPane {
     if (!overlay) return
 
     overlay.settings = settings
+    overlay.onSettingsChanged(settings)
   }
 
   removeAllOverlay () {
