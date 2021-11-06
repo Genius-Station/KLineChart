@@ -27,6 +27,8 @@ export default {
   plots: [
     { key: 'bbi', title: 'BBI: ', type: 'line' }
   ],
+  defaultPane: 'candle_pane',
+  description: 'Bull And Bear Index',
   calcTechnicalIndicator: (dataList, { params }) => {
     const maxPeriod = Math.max.apply(null, params)
     const closeSums = []

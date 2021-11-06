@@ -18,6 +18,8 @@ export default {
   calcParams: [2, 2, 20],
   precision: 2,
   shouldOhlc: true,
+  defaultPane: 'candle_pane',
+  description: 'Stop And Reverse',
   plots: [
     {
       key: 'sar',

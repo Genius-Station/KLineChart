@@ -131,7 +131,7 @@ export default class TechnicalIndicatorStore {
     name, series, calcParams, plots, precision,
     shouldCheckParamCount, shouldOhlc, shouldFormatBigNumber,
     minValue, maxValue, styles,
-    calcTechnicalIndicator, regeneratePlots, render
+    calcTechnicalIndicator, regeneratePlots, render, defaultPane, description
   }) {
     if (!name || !isFunction(calcTechnicalIndicator)) {
       logWarn('', '', 'The required attribute "name" and method "calcTechnicalIndicator" are missing, and new technical indicator cannot be generated!!!')
@@ -151,7 +151,9 @@ export default class TechnicalIndicatorStore {
             shouldFormatBigNumber,
             minValue,
             maxValue,
-            styles
+            styles,
+            description,
+            defaultPane
           }
         )
       }

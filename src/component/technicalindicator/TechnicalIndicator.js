@@ -37,7 +37,7 @@ export default class TechnicalIndicator {
   constructor ({
     name, series, calcParams, plots, precision,
     shouldCheckParamCount, shouldOhlc, shouldFormatBigNumber,
-    minValue, maxValue, styles
+    minValue, maxValue, styles, defaultPane, description
   }) {
     // 指标名
     this.name = name || ''
@@ -65,6 +65,9 @@ export default class TechnicalIndicator {
     this.styles = styles
     // 结果
     this.result = []
+
+    this.defaultPane = defaultPane
+    this.description = description
   }
 
   _createParams (calcParams) {

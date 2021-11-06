@@ -44,6 +44,8 @@ export default {
     { key: 'mid', title: 'MID: ', type: 'line' },
     { key: 'dn', title: 'DN: ', type: 'line' }
   ],
+  defaultPane: 'candle_pane',
+  description: 'Bollingers Bands',
   calcTechnicalIndicator: (dataList, { params }) => {
     const p = params[0] - 1
     let closeSum = 0

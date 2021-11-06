@@ -25,6 +25,8 @@ export default {
   ],
   shouldCheckParamCount: true,
   shouldOhlc: true,
+  defaultPane: 'candle_pane',
+  description: 'Simple Moving Average',
   calcTechnicalIndicator: (kLineDataList, { params }) => {
     let closeSum = 0
     let smaValue = 0

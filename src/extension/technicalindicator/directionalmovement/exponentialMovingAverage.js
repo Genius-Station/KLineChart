@@ -22,6 +22,8 @@ export default {
   precision: 2,
   shouldCheckParamCount: false,
   shouldOhlc: true,
+  defaultPane: 'candle_pane',
+  description: 'Exponential Moving Average',
   plots: [
     { key: 'ema6', title: 'EMA6: ', type: 'line' },
     { key: 'ema12', title: 'EMA12: ', type: 'line' },

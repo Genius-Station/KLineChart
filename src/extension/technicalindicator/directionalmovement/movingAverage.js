@@ -22,6 +22,8 @@ export default {
   precision: 2,
   shouldCheckParamCount: false,
   shouldOhlc: true,
+  defaultPane: 'candle_pane',
+  description: 'Moving Average',
   plots: [
     { key: 'ma5', title: 'MA5: ', type: 'line' },
     { key: 'ma10', title: 'MA10: ', type: 'line' },
